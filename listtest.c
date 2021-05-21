@@ -46,9 +46,11 @@ LinkedList* testCreateList()
 {
     LinkedList* list = NULL;
 
-    //fputs("Test 1 - Create List:\t\t", stdout);
-    list = createList();
+    #ifndef QUIET
+    fputs("Test 1 - Create List:\t\t", stdout);
+    #endif
 
+    list = createList();
     if(list == NULL)
     {
         puts("Failed to create list!");
@@ -69,7 +71,10 @@ bool testInsFirst1(LinkedList* list)
     str = (char*)calloc(10, sizeof(char));
     strcpy(str, "InsFirst1");
 
-    //fputs("Test 2 - Insert First 1:\t", stdout);
+    #ifndef QUIET
+    fputs("Test 2 - Insert First 1:\t", stdout);
+    #endif
+
     insertFirst(list, str);
 
     return (testHead(list, "InsFirst1") && testTail(list, "InsFirst1") && list->count == 1);
@@ -82,7 +87,10 @@ bool testInsLast1(LinkedList* list)
     str = (char*)calloc(10, sizeof(char));
     strcpy(str, "InsLast1");
 
-    //fputs("Test 3 - Insert Last 1:\t\t", stdout);
+    #ifndef QUIET
+    fputs("Test 3 - Insert Last 1:\t\t", stdout);
+    #endif
+
     insertLast(list, str);
 
     return (testHead(list, "InsFirst1") && testTail(list, "InsLast1") && list->count == 2);
@@ -95,7 +103,10 @@ bool testInsFirst2(LinkedList* list)
     str = (char*)calloc(10, sizeof(char));
     strcpy(str, "InsFirst2");
 
-    //fputs("Test 4 - Insert First 2:\t", stdout);
+    #ifndef QUIET
+    fputs("Test 4 - Insert First 2:\t", stdout);
+    #endif
+
     insertFirst(list, str);
 
     return (testHead(list, "InsFirst2") && testTail(list, "InsLast1") && list->count == 3);
@@ -108,7 +119,10 @@ bool testInsLast2(LinkedList* list)
     str = (char*)calloc(10, sizeof(char));
     strcpy(str, "InsLast2");
 
-    //fputs("Test 5 - Insert Last 2:\t\t", stdout);
+    #ifndef QUIET
+    fputs("Test 5 - Insert Last 2:\t\t", stdout);
+    #endif
+
     insertLast(list, str);
 
     return (testHead(list, "InsFirst2") && testTail(list, "InsLast2") && list->count == 4);
@@ -119,7 +133,10 @@ bool testRmFirst(LinkedList* list)
     char* str;
     bool success;
 
-    //fputs("Test 6 - Remove First:\t\t", stdout);
+    #ifndef QUIET
+    fputs("Test 6 - Remove First:\t\t", stdout);
+    #endif
+
     str = removeFirst(list);
 
     success = (strcmp(str, "InsFirst2") == 0 && testHead(list, "InsFirst1") && testTail(list, "InsLast2") && list->count == 3);
@@ -133,7 +150,10 @@ bool testRmLast(LinkedList* list)
     char* str;
     bool success;
 
-    //fputs("Test 7 - Remove Last:\t\t", stdout);
+    #ifndef QUIET
+    fputs("Test 7 - Remove Last:\t\t", stdout);
+    #endif
+
     str = removeLast(list);
 
     success = (strcmp(str, "InsLast2") == 0 && testHead(list, "InsFirst1") && testTail(list, "InsLast1") && list->count == 2);
@@ -149,7 +169,10 @@ bool testInsFirst3(LinkedList* list)
     str = (char*)calloc(10, sizeof(char));
     strcpy(str, "InsFirst3");
 
-    //fputs("Test 8 - Insert First 3:\t", stdout);
+    #ifndef QUIET
+    fputs("Test 8 - Insert First 3:\t", stdout);
+    #endif
+
     insertFirst(list, str);
 
     return (testHead(list, "InsFirst3") && testTail(list, "InsLast1") && list->count == 3);
@@ -157,7 +180,10 @@ bool testInsFirst3(LinkedList* list)
 
 bool testFreeList(LinkedList* list)
 {
-    //fputs("Test 9 - Free Linked List:\t", stdout);
+    #ifndef QUIET
+    fputs("Test 9 - Free Linked List:\t", stdout);
+    #endif
+
     freeList(list, &free);
     return true;
 }
@@ -180,31 +206,45 @@ int main()
     if(list == NULL)
     {
         rtn = 1;
-        //puts("Failed to create list!\n");
+        #ifndef QUIET
+        puts("Failed to create list!\n");
+        #endif
+
     }
     else
     {
-        //puts("Success");
+        #ifndef QUIET
+        puts("Success");
+        #endif
+
         while(i < 8 && success)
         {
             success = (tests[i])(list);
 
             if(success)
             {
-                //puts("Success");
+                #ifndef QUIET
+                puts("Success");
+                #endif
+
                 passed++;
             }
             else
             {
-                //puts("Failure"/*"Failure\nHere is the list at time of failure:"*/);
-//                printList(list); 
+                #ifndef QUIET
+                puts("Failure");
+                #endif
+
                 rtn = i+2;
             }
             i++;
         }
     }
 
-    //printf("\nNumber of tests passed:\t%d\n", i+1);
+    #ifndef QUIET
+    printf("\nNumber of tests passed:\t%d\n", i+1);
+    #endif
+
 
     return rtn;
 }

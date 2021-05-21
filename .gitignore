@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#executables
+test
+pipesim
+
+#this file in and of itself
+.gitignore
