@@ -107,6 +107,7 @@ void* removeFirst(LinkedList* list)
     {
         list->head = list->head->next;
         free(list->head->prev);
+        list->head->prev = NULL;
     }
 
     list->count--;
@@ -133,6 +134,7 @@ void* removeLast(LinkedList* list)
     {
         list->tail = list->tail->prev;
         free(list->tail->next);
+        list->tail->next = NULL;
     }
 
     list->count--;
