@@ -1,6 +1,6 @@
 CFLAGS = -Wall -g
-OBJ = linkedlist.o listtest.o
-EXEC = test
+OBJ = linkedlist.o pipesim.o fileio.o
+EXEC = pipesim
 CC = gcc
 
 $(EXEC) : $(OBJ)
@@ -13,4 +13,4 @@ linkedlist.o : linkedlist.c linkedlist.h
 	$(CC) $(CFLAGS) -c linkedlist.c
 
 clean:
-	rm -f $(EXEC) listtest.o linkedlist.o
+	rm -f $(EXEC) $(OBJ)

@@ -10,8 +10,8 @@
 
 typedef struct
 {
-    char[81] command; //Command to be executed
-    char* output; //Output of the specified command
+    int argc; //Number of arguments of the command
+    char** argv; //Arguments of the command - args[0] is the program name
 } Process;
 
 #endif
